@@ -18,12 +18,77 @@
 
 var viewerApp;
 
+$(document).ready(function () {
+  launchViewer('dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6c21lYy1wb2MtcmV2aXQvTklGLVNNRS1NT0QtU1QtMjQxMDAxXzE4MDgxNC5ydnQ');
+
+  var gauge = new RGraph.Gauge({
+    id: 'cvs',
+    min: 0,
+    max: 50,
+    value: 25,
+    options: {
+        centery: 120,
+        radius: 130,
+        anglesStart: RGraph.PI,
+        anglesEnd: RGraph.TWOPI,
+        needleSize: 85,
+        borderWidth: 0,
+        shadow: false,
+        needleType: 'line',
+        colorsRanges: [[0,10,'red'], [10,20,'yellow'],[20,50,'#0f0']],
+        borderInner: 'rgba(0,0,0,0)',
+        borderOuter: 'rgba(0,0,0,0)',
+        borderOutline: 'rgba(0,0,0,0)',
+        centerpinColor: 'rgba(0,0,0,0)',
+        centerpinRadius: 0,
+        textAccessible: true
+    }
+}).grow()
+
+var gauge = new RGraph.Gauge({
+  id: 'cvs2',
+  min: 0,
+  max: 50,
+  value: 40,
+  options: {
+      centery: 120,
+      radius: 130,
+      anglesStart: RGraph.PI,
+      anglesEnd: RGraph.TWOPI,
+      needleSize: 85,
+      borderWidth: 0,
+      shadow: false,
+      needleType: 'line',
+      colorsRanges: [[0,10,'red'], [10,20,'yellow'],[20,50,'#0f0']],
+      borderInner: 'rgba(0,0,0,0)',
+      borderOuter: 'rgba(0,0,0,0)',
+      borderOutline: 'rgba(0,0,0,0)',
+      centerpinColor: 'rgba(0,0,0,0)',
+      centerpinRadius: 0,
+      textAccessible: true
+  }
+}).grow()
+
+gauge.canvas.onclick = function (e)
+{
+    var value = gauge.getValue(e);
+    
+    if (typeof value === 'number') {
+        gauge.value = value;
+        gauge.grow();
+    }
+}
+});
+
 function launchViewer(urn) {
   var options = {
     env: 'AutodeskProduction',
     getAccessToken: getForgeToken
   };
   var documentId = 'urn:' + urn;
+  console.log(documentId);
+  // urn:dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6c21lYy1wb2MtcmV2aXQvTklGLVNNRS1NT0QtU1QtMjQxMDAxXzE4MDgxNC5ydnQ=
+
   Autodesk.Viewing.Initializer(options, function onInitialized() {
     viewerApp = new Autodesk.Viewing.ViewingApplication('forgeViewer');
     viewerApp.registerViewer(viewerApp.k3D, Autodesk.Viewing.Private.GuiViewer3D);
