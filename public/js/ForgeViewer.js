@@ -21,63 +21,40 @@ var viewerApp;
 $(document).ready(function () {
   launchViewer('dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6c21lYy1wb2MtcmV2aXQvTklGLVNNRS1NT0QtU1QtMjQxMDAxXzE4MDgxNC5ydnQ');
 
-  var gauge = new RGraph.Gauge({
+  var meter = new RGraph.Meter({
     id: 'cvs',
     min: 0,
-    max: 50,
-    value: 25,
+    max: 100,
+    value: 75,
     options: {
-        centery: 120,
-        radius: 130,
-        anglesStart: RGraph.PI,
-        anglesEnd: RGraph.TWOPI,
-        needleSize: 85,
-        borderWidth: 0,
-        shadow: false,
-        needleType: 'line',
-        colorsRanges: [[0,10,'red'], [10,20,'yellow'],[20,50,'#0f0']],
-        borderInner: 'rgba(0,0,0,0)',
-        borderOuter: 'rgba(0,0,0,0)',
-        borderOutline: 'rgba(0,0,0,0)',
-        centerpinColor: 'rgba(0,0,0,0)',
-        centerpinRadius: 0,
-        textAccessible: true
+        centerpinStroke: 'rgba(0,0,0,0)',
+        centerpinFill: 'rgba(0,0,0,0)',
+        colorsRanges: [
+            [0,10,'#f20'],
+            [10,20,'#f30'],
+            [20,30,'#f50'],
+            [30,40,'#f60'],
+            [40,50,'#f80'],
+            [50,60,'#fa0'],
+            [60,70,'#fc0'],
+            [70,80,'#fd0'],
+            [80,90,'#ff0'],
+            [90,100,'#ff0'],
+        ],
+        labelsCount: 0,
+        anglesStart: RGraph.PI + 0.5,
+        anglesEnd: RGraph.TWOPI - 0.5,
+        linewidthSegments: 0,
+        textSize: 16,
+        strokestyle: 'white',
+        segmentRadiusStart: 150,
+        needleRadius: 210,
+        border: 0,
+        tickmarksSmallNum: 0,
+        tickmarksBigNum: 0,
+        adjustable: true
     }
-}).grow()
-
-var gauge = new RGraph.Gauge({
-  id: 'cvs2',
-  min: 0,
-  max: 50,
-  value: 40,
-  options: {
-      centery: 120,
-      radius: 130,
-      anglesStart: RGraph.PI,
-      anglesEnd: RGraph.TWOPI,
-      needleSize: 85,
-      borderWidth: 0,
-      shadow: false,
-      needleType: 'line',
-      colorsRanges: [[0,10,'red'], [10,20,'yellow'],[20,50,'#0f0']],
-      borderInner: 'rgba(0,0,0,0)',
-      borderOuter: 'rgba(0,0,0,0)',
-      borderOutline: 'rgba(0,0,0,0)',
-      centerpinColor: 'rgba(0,0,0,0)',
-      centerpinRadius: 0,
-      textAccessible: true
-  }
-}).grow()
-
-gauge.canvas.onclick = function (e)
-{
-    var value = gauge.getValue(e);
-    
-    if (typeof value === 'number') {
-        gauge.value = value;
-        gauge.grow();
-    }
-}
+}).draw()
 });
 
 function launchViewer(urn) {
