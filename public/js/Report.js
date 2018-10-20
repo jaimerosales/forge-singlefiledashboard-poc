@@ -6,7 +6,7 @@ var urn = 'dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6c21lYy1wb2MtcmV2aXQvTklGLVNNRS1NT
 // Descriptors to show on the report
 var descriptorsToShow = [
     { descriptor: 'PLV', budget: 30, properties: ['Diameter_LE', 'LengthPile_LE'] },
-    { descriptor: 'PLC' ,budget: 70, properties: ['Volume']},
+    { descriptor: 'PLC', budget: 70, properties: ['Volume'] },
     { descriptor: 'ABH', budget: 48, properties: ['Volume'] },
     { descriptor: 'SLB' },
     { descriptor: 'BPG' },
@@ -92,8 +92,8 @@ function showDescriptor(value) {
         $('#rowLabel' + d).html(d);// + '<br/>' + parseFloat(Math.round(volume * 100) / 100).toFixed(2));
         createBar('#bar' + d,
             [
-                ['LOD100', volume * 0.6],
-                ['LOD200', volume * 0.8],
+                ['LOD100', volume * Math.random() * 0.6],
+                ['LOD200', volume * Math.random() * 0.8],
                 ['LOD300', volume]
             ]);
     });
@@ -120,7 +120,7 @@ function createGauge(id, value) {
             min: 0,
             max: 100,
             label: {
-                show: false
+                format: function (value, ratio) { return ''; } // hide...
             },
         },
         legend: {
@@ -160,7 +160,7 @@ function createBar(id, values) {
         axis: {
             y: {
                 label: {
-                    text: 'Volume m3',
+                    text: 'Volume',
                     position: 'outer-middle'
                 },
                 tick: {
@@ -170,7 +170,7 @@ function createBar(id, values) {
             },
             x: {
                 label: {
-                    text: 'Desing Stage',
+                    text: 'Design Stage',
                     position: 'outer-center'
                 }
             }
