@@ -18,54 +18,12 @@
 
 var viewerApp;
 
-$(document).ready(function () {
-  launchViewer('dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6c21lYy1wb2MtcmV2aXQvTklGLVNNRS1NT0QtU1QtMjQxMDAxXzE4MDgxNC5ydnQ');
-
-  var meter = new RGraph.Meter({
-    id: 'cvs',
-    min: 0,
-    max: 100,
-    value: 75,
-    options: {
-        centerpinStroke: 'rgba(0,0,0,0)',
-        centerpinFill: 'rgba(0,0,0,0)',
-        colorsRanges: [
-            [0,10,'#f20'],
-            [10,20,'#f30'],
-            [20,30,'#f50'],
-            [30,40,'#f60'],
-            [40,50,'#f80'],
-            [50,60,'#fa0'],
-            [60,70,'#fc0'],
-            [70,80,'#fd0'],
-            [80,90,'#ff0'],
-            [90,100,'#ff0'],
-        ],
-        labelsCount: 0,
-        anglesStart: RGraph.PI + 0.5,
-        anglesEnd: RGraph.TWOPI - 0.5,
-        linewidthSegments: 0,
-        textSize: 16,
-        strokestyle: 'white',
-        segmentRadiusStart: 150,
-        needleRadius: 210,
-        border: 0,
-        tickmarksSmallNum: 0,
-        tickmarksBigNum: 0,
-        adjustable: true
-    }
-}).draw()
-});
-
 function launchViewer(urn) {
   var options = {
     env: 'AutodeskProduction',
     getAccessToken: getForgeToken
   };
   var documentId = 'urn:' + urn;
-  console.log(documentId);
-  // urn:dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6c21lYy1wb2MtcmV2aXQvTklGLVNNRS1NT0QtU1QtMjQxMDAxXzE4MDgxNC5ydnQ=
-
   Autodesk.Viewing.Initializer(options, function onInitialized() {
     viewerApp = new Autodesk.Viewing.ViewingApplication('forgeViewer');
     viewerApp.registerViewer(viewerApp.k3D, Autodesk.Viewing.Private.GuiViewer3D);
@@ -93,6 +51,7 @@ function onDocumentLoadFailure(viewerErrorCode) {
 
 function onItemLoadSuccess(viewer, item) {
   // item loaded, any custom action?
+  viewer.addEventListener(Autodesk.Viewing.GEOMETRY_LOADED_EVENT, createReport);
 }
 
 function onItemLoadFail(errorCode) {

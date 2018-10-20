@@ -2,8 +2,9 @@
 <html>
 
 <head>
-  <title>Autodesk Forge Tutorial</title>
+  <title>SMEC | Dashboard</title>
   <meta charset="utf-8" />
+  <link rel="shortcut icon" href="https://github.com/Autodesk-Forge/learn.forge.viewhubmodels/raw/master/img/favicon.ico">
   <!-- Common packages: jQuery, Bootstrap, jsTree -->
   <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -11,14 +12,15 @@
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
   <!-- Autodesk Forge Viewer files -->
-  <link rel="stylesheet" href="https://developer.api.autodesk.com/modelderivative/v2/viewers/style.min.css?v=v6.0" type="text/css">
-  <script src="https://developer.api.autodesk.com/modelderivative/v2/viewers/viewer3D.min.js?v=v6.0"></script>
+  <link rel="stylesheet" href="https://developer.api.autodesk.com/modelderivative/v2/viewers/style.min.css?v=v6.*" type="text/css">
+  <script src="https://developer.api.autodesk.com/modelderivative/v2/viewers/viewer3D.js?v=v6.*"></script>
+
+  <script src="https://d3js.org/d3.v5.min.js"></script>
+  <link rel="stylesheet" href="js/libs/c3.min.css"/>
+  <script src="js/libs/c3.min.js"></script>
   <!-- this project files -->
   <link href="css/main.css" rel="stylesheet" />
-  <script src="https://www.rgraph.net/libraries/src/RGraph.common.core.js"></script>
-  <script src="https://www.rgraph.net/libraries/src/RGraph.common.dynamic.js"></script>
-  <script src="https://www.rgraph.net/libraries/src/RGraph.meter.js"></script>
-  <!-- <script src="js/ForgeTree.js"></script> -->
+  <script src="js/Report.js"></script>
   <script src="js/ForgeViewer.js"></script>
 
 </head>
@@ -30,7 +32,7 @@
       <ul class="nav navbar-nav left">
         <li>
           <a href="http://developer.autodesk.com" target="_blank">
-            <img alt="Autodesk Forge" src="//developer.static.autodesk.com/images/logo_forge-2-line.png" height="20">
+            <img alt="Autodesk Forge" src="http://www.smec.com/application/themes/smec/images/logo.png" height="30">
           </a>
         </li>
       </ul>
@@ -42,35 +44,7 @@
       <div class="col-sm-6 fill">
         <div id="forgeViewer"></div>
       </div>
-      <div class="col-sm-6 fill">
-        <canvas id="cvs" width="600" height="250" style="border-radius: 15px">
-          [No canvas support]
-      </canvas>
-      </div>
-    </div>
-  </div>
-  <form id="uploadFile" method='post' enctype="multipart/form-data">
-    <input id="hiddenUploadField" type="file" name="theFile" style="visibility:hidden" />
-  </form>
-  <!-- Modal Create Bucket -->
-  <div class="modal fade" id="createBucketModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Cancel">
-            <span aria-hidden="true">&times;</span>
-          </button>
-          <h4 class="modal-title" id="myModalLabel">Create new bucket</h4>
-        </div>
-        <div class="modal-body">
-          <input type="text" id="newBucketKey" class="form-control"> For demonstration purposes, objects (files) 
-          are NOT automatically translated. After you upload, right click on
-          the object and select "Translate".
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-          <button type="button" class="btn btn-primary" id="createNewBucket">Go ahead, create the bucket</button>
-        </div>
+      <div class="col-sm-6 fill" id="report">
       </div>
     </div>
   </div>
