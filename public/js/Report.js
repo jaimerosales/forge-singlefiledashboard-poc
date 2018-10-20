@@ -78,7 +78,7 @@ function showDescriptor(value) {
         elements.forEach(function (ele) {
             if (ele.properties.length > 0 && ele.properties[0].displayValue != '') {
                 switch (d) {
-                    case 'ABH': case 'DES':
+                    case 'ABH': case 'DES': case 'PLC':
                         volume += Number.parseFloat(ele.properties[0].displayValue);
                         break;
                     case 'PLV':
